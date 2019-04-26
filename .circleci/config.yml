@@ -20,6 +20,8 @@ jobs:
           paths:
             - ~/.stack
       - run: |
+          export CPATH=/usr/include/hdf5/serial
+          export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/hdf5/serial
           stack --no-terminal --system-ghc build --haddock --test --no-run-tests
           stack --no-terminal --system-ghc run hdf5-hs
           stack --no-terminal --system-ghc install
