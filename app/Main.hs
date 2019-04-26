@@ -45,7 +45,8 @@ readData name =
      h5f_close file
 
 main :: IO ()
-main = do putStrLn "Creating example HDF5 file..."
+main = do h5_check_version h5_vers_major h5_vers_minor h5_vers_release
+          putStrLn "Creating example HDF5 file..."
           writeData "example.h5"
           putStrLn "Opening example HDF5 file..."
           readData "example.h5"

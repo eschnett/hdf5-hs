@@ -7,4 +7,7 @@ packages:
 
 # Dependency packages to be pulled from upstream that are not in the resolver
 extra-deps:
-- ../bindings-dsl/bindings-hdf5
+# - ../bindings-dsl/bindings-hdf5
+- git: https://github.com/jwiegley/bindings-dsl
+  commit: ec36a594f98f6255ea145ea67f96013981107f7f
+  subdirs: [bindings-hdf5]

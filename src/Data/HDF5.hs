@@ -1,6 +1,12 @@
 module Data.HDF5
-  ( -- * Files
-    File(..)
+  ( -- * Basics
+    h5_vers_major
+  , h5_vers_minor
+  , h5_vers_release
+  , h5_get_libversion
+  , h5_check_version
+    -- * Files
+  , File(..)
   , H5F_ACC(..)
   , h5f_close
   , h5f_create
@@ -56,8 +62,37 @@ import Data.Maybe (maybe)
 import Foreign.C
 import Foreign.Marshal
 import Foreign.Ptr
+import Foreign.Storable
 
 import Bindings.HDF5
+
+
+-- Basics ----------------------------------------------------------------------
+
+h5_vers_major :: Int
+h5_vers_major = c'H5_VERS_MAJOR
+h5_vers_minor :: Int
+h5_vers_minor = c'H5_VERS_MINOR
+h5_vers_release :: Int
+h5_vers_release = c'H5_VERS_RELEASE
+
+h5_get_libversion :: IO (Int, Int, Int)
+h5_get_libversion =
+  do (majnum, minnum, relnum) <- alloca \pmajnum ->
+       alloca \pminnum ->
+       alloca \prelnum ->
+       do herr <- c'H5get_libversion pmajnum pminnum prelnum
+          majnum <- peek pmajnum
+          minnum <- peek pminnum
+          relnum <- peek prelnum
+          return (majnum, minnum, relnum)
+     return (fromIntegral majnum, fromIntegral minnum, fromIntegral relnum)
+
+h5_check_version :: Int -> Int -> Int -> IO ()
+h5_check_version majnum minnum relnum =
+  do herr <- c'H5check_version (fromIntegral majnum) (fromIntegral minnum)
+       (fromIntegral relnum)
+     return ()
 
 
 
