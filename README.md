@@ -15,8 +15,8 @@
 
 ## Overview
 
-HDF5 (the Hierarchical Data Format) is widely used standard for
-storing and archiving large amounts of structured data. This library
+HDF5 (the Hierarchical Data Format) is a widely used file format and
+library for storing and archiving scientific data. This library
 `hdf5-hs` provides Haskell bindings for HDF5.
 
 `hdf5-hs` provides two API levels: A low-level API gives rather direct
