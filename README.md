@@ -1,48 +1,29 @@
-# [hdf5-hs][]
+# [hdf5-hs](https://github.com/eschnett/hdf5-hs)
 
-Thanks for starting a project with Eschnett! If you haven't heard of it
-before, I suggest reading the introductory blog post. You can find it here:
-<http://taylor.fausak.me/2014/03/04/eschnett-a-haskell-project-skeleton/>.
+[HDF5](https://www.hdfgroup.org) bindings for Haskell
 
-Before you get started, there are a few things that this template couldn't
-provide for you. You should:
+* [GitHub](https://github.com/eschnett/hdf5-hs): Source code repository
+* TODO: [Hackage](http://hackage.haskell.org/package/hdf5-hs): Haskell
+  package and documentation
+* TODO: [Stackage](https://www.stackage.org/package/hdf5-hs): Stackage
+  snapshots
+* [CircleCI](https://circleci.com/gh/eschnett/hdf5-hs): Continuous
+  integration
+  [![CircleCI](https://circleci.com/gh/eschnett/hdf5-hs.svg?style=svg)](https://circleci.com/gh/eschnett/hdf5-hs)
 
--   Add a synopsis to `package.yaml`. It should be a short (one sentence)
-    explanation of your project.
 
--   Add a description to `package.yaml`. This can be whatever you want it to
-    be.
 
--   Add a category to `package.yaml`. A list of categories is available on
-    Hackage at <http://hackage.haskell.org/packages>.
+## Overview
 
--   Rename `src/Example.hs` to whatever you want your top-level module to
-    be called. Typically this is the same as your package name but in
-    `CamelCase` instead of `kebab-case`.
+HDF5 (the Hierarchical Data Format) is widely used standard for
+storing and archiving large amounts of structured data. This library
+`hdf5-hs` provides Haskell bindings for HDF5.
 
-    -   Don't forget to rename the reference to it in
-        `app/Main.hs`!
-
--   If you are on an older version of Stack (<1.0.4), delete `package.yaml` and
-    remove `/*.cabal` from your `.gitignore`.
-
-Once you've done that, start working on your project with the Stack commands
-you know and love.
-
-``` sh
-# Build the project.
-stack build
-
-# Run the test suite.
-stack test
-
-# Run the benchmarks.
-stack bench
-
-# Generate documentation.
-stack haddock
-```
-
-Thanks again, and happy hacking!
-
-[hdf5-hs]: https://github.com/eschnett/hdf5-hs
+`hdf5-hs` provides two API levels: A low-level API gives rather direct
+access to the HDF5 API, apart from certain "reasonable" mappings from
+C to Haskell (e.g. output arguments that are in C stored to a pointer
+are in Haskell regular return values). A high-level API simplifies
+storing and retrieving arbitrary values that can be serialized. A
+possible third level would look similar to the
+[`yaml`](https://github.com/snoyberg/yaml) package, allowing
+serialization of Haskell values similar to JSON or YAML files.
