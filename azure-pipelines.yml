@@ -13,22 +13,22 @@ pool:
   vmImage: ubuntu-16.04
 
 steps:
-- displayName: Install HDF5
-  script: |
+- script: |
     sudo apt update
     sudo apt -y install libhdf5-dev hdf5-tools
-- displayName: Install Stack
-  script: |
+  displayName: Install HDF5
+- script: |
     mkdir -p ~/.local/bin
-    curl -L https://get.haskellstack.org/stable/linux-x86_64.tar.gz | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
-- displayName: Build Dependencies
-  script: |
+    curl -L https://get.haskellstack.org/stable/linux-x86_64.tar.gz |
+    tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+  displayName: Install Stack
+- script: |
     export CPATH=/usr/include/hdf5/serial
     export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/hdf5/serial
     export PATH=$HOME/.local/bin:$PATH
     stack --no-terminal --install-ghc test --only-dependencies
-- displayName: Test Package
-  script: |
+  displayName: Build Dependencies
+- script: |
     export CPATH=/usr/include/hdf5/serial
     export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/hdf5/serial
     export PATH=$HOME/.local/bin:$PATH
@@ -36,3 +36,4 @@ steps:
     stack test --haddock --no-haddock-deps
     stack run hdf5-hs
     stack install
+  displayName: Test Package
