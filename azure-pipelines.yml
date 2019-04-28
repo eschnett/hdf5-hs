@@ -1,19 +1,38 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# This is a simple Azure configuration, which is intended for use
+# on applications which do not require cross-platform and
+# multiple-GHC-version support. For more information and other
+# options, see:
+#
+# https://docs.haskellstack.org/en/stable/azure_ci/
+#
+# Copy these contents into the root directory of your Github project in a file
+# named azure-pipelines.yml
 
-trigger:
-- master
-
+# Choose a agent virtual image
 pool:
-  vmImage: 'Ubuntu-16.04'
+  vmImage: ubuntu-16.04
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- displayName: Install HDF5
+  script: |
+    sudo apt update
+    sudo apt -y install libhdf5-dev hdf5-tools
+- displayName: Install Stack
+  script: |
+    mkdir -p ~/.local/bin
+    curl -L https://get.haskellstack.org/stable/linux-x86_64.tar.gz | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+- displayName: Build Dependencies
+  script: |
+    export CPATH=/usr/include/hdf5/serial
+    export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/hdf5/serial
+    export PATH=$HOME/.local/bin:$PATH
+    stack --no-terminal --install-ghc test --only-dependencies
+- displayName: Test Package
+  script: |
+    export CPATH=/usr/include/hdf5/serial
+    export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/hdf5/serial
+    export PATH=$HOME/.local/bin:$PATH
+    # Build the package, its tests, and its docs and run the tests
+    stack test --haddock --no-haddock-deps
+    stack run hdf5-hs
+    stack install
