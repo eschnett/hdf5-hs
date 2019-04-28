@@ -9,7 +9,7 @@
   snapshots
 * [Azure Pipelines](https://dev.azure.com/schnetter/hdf5-hs/_build):
   Build Status [![Build
-  Status](https://dev.azure.com/schnetter/hdf5-hs/_apis/build/status/eschnett.hdf5-hs?branchName=master):](https://dev.azure.com/schnetter/hdf5-hs/_build/latest?definitionId=1&branchName=master)
+  Status](https://dev.azure.com/schnetter/hdf5-hs/_apis/build/status/eschnett.hdf5-hs?branchName=master)](https://dev.azure.com/schnetter/hdf5-hs/_build/latest?definitionId=1&branchName=master)
 * [CircleCI](https://circleci.com/gh/eschnett/hdf5-hs): Continuous
   integration
   [![CircleCI](https://circleci.com/gh/eschnett/hdf5-hs.svg?style=svg)](https://circleci.com/gh/eschnett/hdf5-hs)
